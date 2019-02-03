@@ -1,0 +1,1 @@
+makeindex -s 0069069002_Tomislav_Milanovic.ist -o 0069069002_Tomislav_Milanovic.gls 0069069002_Tomislav_Milanovic.glo

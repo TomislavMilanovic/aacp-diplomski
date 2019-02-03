@@ -1,0 +1,31 @@
+\chapter{Uvod}
+
+Interakcija èovjeka i raèunala (eng. \textit{\gls{hci}}) ima za cilj istraživati dizajn i korištenje raèunalne tehnologije, odnosno suèelja izmeðu ljudi (korisnika) i raèunala. Uspješno suèelje za interakciju s raèunalom ima za cilj postiæi dobru upotrebljivost (eng. \textit{usability}), koja ukljuèuje olakšan i ubrzan rad te jednostavno savladavanje uporabe samog korisnièkog suèelja. Intuitivnost se postiže korištenjem koncepata i mehanizama koji su potencijalnim korisnicima veæ otprije poznati kroz iskustvo rada s ostalim korisnièkim suèeljima.
+
+U ovom radu, fokus je usmjeren na izradi i evaluaciji raèunalnog programa (\textbf{univerzalna paleta komandi}) koji nastoji omoguæiti korisniku jednostavan pristup funkcionalnostima \textbf{bilo kojeg} drugog programa uz pomoæ pretrage po kljuènim rijeèima, umjesto traženja po hijerarhiji izbornika ili ostalim dijelovima suèelja tog programa. Poseban je naglasak stavljen na brzi dohvat rjeðe korištenih funkcionalnosti, za koje korisnik možda ne zna napamet gdje se nalaze.
+
+\section{Paleta komandi}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[height=4.5cm,width=8.5cm,keepaspectratio=true]{atom_command_palette}
+		\caption{Paleta komandi u programu Atom}
+		\label{fig:atom_command_palette}
+	\end{center}
+\end{figure}
+
+Paleta komandi (eng. \textit{command palette}) predstavlja listu dostupnih komandi koje se mogu izvršiti unutar programa i polje za unos kljuènih rijeèi za pronalazak željene komande. Na slici \ref{fig:atom_command_palette} \cite{1_2019} prikazan je moguæi izgled palete u programu \textit{Atom} (ureðivaè teksta i programskog koda) kada se unese "com". Korisnik može odabrati i izvršiti jednu od ponuðenih komandi. Paleta se poziva korištenjem tipkovnièkog preèaca \textit{Cmd+Shift+P} na macOS, odnosno \textit{Ctrl+Shift+P} na Linux i Windows operacijskim sustavima.
+
+Dodatna prednost palete komandi je smanjivanje potrebe za prebacivanjem izmeðu tipkovnice i miša (eng. \textit{homing} - prebacivanje s jednog na drugi ureðaj za upravljanje raèunalom). U ovom radu implementirana je univerzalna paleta komandi, koja se može koristiti u bilo kojem programu jer je svjesna aplikacije za koju se pokreæe.
+
+\section{Evaluacija univerzalne palete komandi}
+
+Upotrebljivost univerzalne palete komandi ispituje se na temelju unaprijed definiranih zadataka koji ukljuèuju rad s popularnim programima:
+
+\begin{itemize}
+	\item \textbf{Google Chrome} - web preglednik
+	\item \textbf{LibreOffice Writer} - ureðivaè teksta
+	\item \textbf{GIMP} - ureðivaè slika
+\end{itemize}
+
+Zadaci su osmišljeni tako da predstave uobièajeni, svakodnevni rad na raèunalu. Sastoje se od kombinacije èešæe i rjeðe korištenih funkcionalnosti navedenih programa. Usporeðuje se vrijeme potrebno za obavljanje svih zadataka sa i bez univerzalne palete komandi. Takoðer, preko predispitnih i postispitnih anketa želi se dobiti uvid u kojoj mjeri ispitanici koriste tipkovnièke preèace i palete komandi iz programa koji ih podržavaju te na kraju njihovo zadovoljstvo korištenja univerzalne palete komandi.
