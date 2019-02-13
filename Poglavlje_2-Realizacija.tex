@@ -1,0 +1,51 @@
+\chapter{Realizacija univerzalne palete komandi}
+
+\section{Dizajn}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[height=4.5cm,width=8.5cm,keepaspectratio=true]{snv_design}
+		\caption{Skica željenog izgleda univerzalne palete komandi}
+		\label{fig:snv_design}
+	\end{center}
+\end{figure}
+
+Na slici \ref{fig:snv_design} prikazan je željeni izgled univerzalne palete komandi koji se sastoji od dvije osnovne cjeline: polja za unos teksta i liste komandi. Pritom, maksimalni broj vidljivih komandi u listi æe se moæi podesiti (poèetna postavka je sedam komandi). Ukoliko se u listi komandi nalazi više stavki od tog broja, pojavljuje se vertikalna traka za pomicanje (eng. \textit{scrollbar}) kako bi korisnici mogli imati pristup svim komandama. Uvijek je oznaèena samo jedna komanda a unosom odreðenog pojma prikazuje se lista komandi koja odgovara tom pojmu, kako je prikazano na slici.
+
+Paletom æe se moæi upravljati s tipkovnicom (koristeæi strelice za gore i dolje te \textit{Enter} za odabir komande) ili s mišem (korištenjem trake za pomicanje i klikanjem na željenu komandu).
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[height=4.5cm,width=8.5cm,keepaspectratio=true]{snv_app_aware}
+		\caption{Univerzalna paleta komandi je svjesna aplikacije koju korisnik trenutno upotrebljava}
+		\label{fig:snv_app_aware}
+	\end{center}
+\end{figure}
+
+Glavna znaèajka univerzalne palete komandi je njena svjesnost aplikacije koju korisnik trenutno upotrebljava, što je vidljivo na slici \ref{fig:snv_app_aware} (prikazane komande su samo za demonstraciju koncepta). Ovisno o aplikaciji, izbor komandi se razlikuje.
+
+Dodatno, univerzalna paleta komandi æe pamtiti i frekvenciju korištenja svake komande, kako bi one koje se najèešæe koriste bile prikazane na vrhu liste. Nakon iznesenih zahtjeva, nameæu se sljedeæi izazovi:
+\begin{itemize}
+	\item Kako prepoznati aplikaciju koja se trenutno koristi?
+	\item Koji je univerzalan naèin na koji neki program može izvršiti bilo koju radnju u nekom drugom programu?
+\end{itemize}
+
+Prvi problem je riješen tako da se koristi alat za prepoznavanje procesa kojem trenutno fokusirani prozor pripada te se u skladu s time uèitava odgovarajuæa lista komandi. Kod drugog izazova, izvršavanje komandi se postiže emulacijom tipkovnièkih preèaca. Primjerice, kod izvršavanja komande \textit{Otvori datoteku}, univerzalna paleta æe emulirati tipkovnièki preèac \textit{Ctrl + O}.
+
+\section{Dijagram toka}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[height=17cm,width=17cm,keepaspectratio=true]{snv_flow_diagram}
+		\caption{Dijagram toka rada univerzalne palete komandi}
+		\label{fig:snv_flow_diagram}
+	\end{center}
+\end{figure}
+
+Cjelokupni naèin rada univerzalne palete komandi prikazan je na slici \ref{fig:snv_flow_diagram}. Veæinu vremena, ovaj program æe provesti kao pozadinski proces (eng. \textit{daemon}) te æe osluškivati korisnikove unose na tipkovnici. U trenutku kada korisnik upotrijebi \textit{meta-preèac}, koji je u ovom radu podešen na "Ctrl + Win Key", program æe provjeriti prvo je li aplikacija koji se trenutno koristi podržana. Ako nije, ništa se neæe dogoditi, no ako je, uèitat æe se lista komandi i paleta æe se prikazati na ekranu.
+
+Korisnik može pretražiti i izvršiti željenu komandu ili može zatvoriti paletu korištenjem tipke \textit{Esc} ili gubitkom fokusa na prozor palete.
+
+\section{Implementacija}
+
+Napisati implementaciju.
