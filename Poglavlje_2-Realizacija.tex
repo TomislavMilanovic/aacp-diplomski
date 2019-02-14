@@ -32,6 +32,8 @@ Dodatno, univerzalna paleta komandi æe pamtiti i frekvenciju korištenja svake ko
 
 Prvi problem je riješen tako da se koristi alat za prepoznavanje procesa kojem trenutno fokusirani prozor pripada te se u skladu s time uèitava odgovarajuæa lista komandi. Kod drugog izazova, izvršavanje komandi se postiže emulacijom tipkovnièkih preèaca. Primjerice, kod izvršavanja komande \textit{Otvori datoteku}, univerzalna paleta æe emulirati tipkovnièki preèac \textit{Ctrl + O}.
 
+Tipkovnièki preèaci su koncept koji je široko rasprostranjen u softveru na klasiènim, \textit{desktop} raèunalima, gdje se koriste miš i tipkovnica. Gotovo da nema aplikacije koja ih ne koristi kako bi svojim korisnicima pružila ubrzani rad s aplikacijom. Zbog toga, emuliranje preèaca donosi \textbf{univerzalnost} ovom programu.
+
 \section{Dijagram toka}
 
 \begin{figure}[!htbp]
@@ -48,4 +50,58 @@ Korisnik može pretražiti i izvršiti željenu komandu ili može zatvoriti paletu ko
 
 \section{Implementacija}
 
-Napisati implementaciju.
+Univerzalna paleta komandi implementirana je za sustave bazirane na Linuxu. Konkretno, koristila se Antergos distribucija s \textbf{KDE} okolišem. Temelji se na programskom jeziku Python 3.7.2 i sljedeæim modulima:
+
+\begin{itemize}
+	\item \textit{Tkinter} - \textit{de-facto} standardni paket za razvoj GUI aplikacija, temeljen na \textbf{Tcl/Tk} alatima \cite{2_2019}. Služi za implementaciju korisnièkog suèelja univerzalne palete komandi.
+	\item \textit{PyAutoGUI} - modul za programatsko izvršavanje (emulaciju) uporabe miša i tipkovnice. Koristi se za emulaciju tipkovnièkih preèaca, èime univerzalna paleta komandi izvršava neku radnju u bilo kojoj drugoj aplikaciji.
+	\item \textit{pynput} - knjižnica funkcija za osluškivanje korisnikovog unosa na tipkovnici. Omoguæava uporabu meta-preèaca za pozivanje univerzalne palete komandi.
+\end{itemize}
+
+Za prepoznavanje aplikacije koju korisnik trenutno upotrebljava koristimo Linux alat \textit{xdotool} \cite{3_2019}, uz èiju pomoæ možemo saznati PID (eng. \textit{Process ID}) trenutno korištene aplikacije. S tom informacijom, od poznate \textit{shell} naredbe \textit{ps} doznajemo ime procesa s tim PID-om.
+
+Komande se spremaju kao JSON datoteke za svaku aplikaciju zasebno. Nazivi tih datoteka odgovaraju imenima procesa tih aplikacija u Linux sustavima.
+
+\begin{figure}[!htbp]
+	\begin{lstlisting}[language=json, label={code:2.1}, caption={Pokazni primjer moguæe JSON datoteke za konfiguraciju komandi u programu Google Chrome}]
+{
+   "Bookmark": {
+      "type": "shortcut",
+      "shortcuts": [
+         [
+         "ctrl",
+         "d"
+         ]
+      ],
+      "frequency": 0
+   },
+   "Clear Browsing Data": {
+      "type": "shortcut",
+      "shortcuts": [
+         [
+            "ctrl",
+            "shift",
+            "del"
+         ]
+      ],
+      "frequency": 0
+   }
+}
+	\end{lstlisting}
+\end{figure}
+
+U isjeèku koda \ref{code:2.1} možemo vidjeti kako bi izgledao JSON zapis komandi za program Google Chrome kada bismo imali samo dvije stavke. Pri tome, važno je napomenuti kako oznake za tipke koje èine odreðeni tipkovnièki preèac (\textit{ctrl}, \textit{shift}, \textit{del} i slièni) moraju odgovarati oznakama koje se pojavljuju u dokumentaciji za modul \textit{PyAutoGUI} \cite{4_2019}.
+
+Prvo polje (u ovom primjeru \textit{Bookmark} i \textit{Clear Browsing Data}) predstavlja ime komande, odnosno ono što æe se korisniku univerzalne palete komandi prikazati na ekranu.
+
+Polje \textit{frequency} oznaèava koliko je puta komanda bila korištena otkad je korisnik poèeo upotrebljavati univerzalnu paletu komandi. Može se zakljuèiti kako je jednostavno podešavati tu vrijednost, ukoliko postoji potreba za time.
+
+Sve u svemu, JSON predstavlja prikladan format za zapis podataka ovakvog tipa, jer je jednostavan za uporabu i jasno èitljiv ljudima.
+
+\section{Prezentacija}
+
+Napisati prezentaciju.
+
+\section{Izazovi i moguæa poboljšanja}
+
+Napisati izazove i moguæa poboljšanja.
