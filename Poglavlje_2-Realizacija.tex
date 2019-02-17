@@ -4,19 +4,19 @@
 
 \begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[height=4.5cm,width=8.5cm,keepaspectratio=true]{snv_design}
+		\includegraphics[scale=0.70]{snv_design}
 		\caption{Skica željenog izgleda univerzalne palete komandi}
 		\label{fig:snv_design}
 	\end{center}
 \end{figure}
 
-Na slici \ref{fig:snv_design} prikazan je željeni izgled univerzalne palete komandi koji se sastoji od dvije osnovne cjeline: polja za unos teksta i liste komandi. Pritom, maksimalni broj vidljivih komandi u listi æe se moæi podesiti (poèetna postavka je sedam komandi). Ukoliko se u listi komandi nalazi više stavki od tog broja, pojavljuje se vertikalna traka za pomicanje (eng. \textit{scrollbar}) kako bi korisnici mogli imati pristup svim komandama. Uvijek je oznaèena samo jedna komanda a unosom odreðenog pojma prikazuje se lista komandi koja odgovara tom pojmu, kako je prikazano na slici.
+Na slici \ref{fig:snv_design} prikazan je željeni izgled univerzalne palete komandi koji se sastoji od dvije osnovne cjeline: polja za unos teksta i liste komandi. Pritom, maksimalni broj vidljivih komandi u listi æe se moæi podesiti (poèetna postavka je deset komandi). Ukoliko se u listi komandi nalazi više stavki od tog broja, pojavljuje se vertikalna traka za pomicanje (eng. \textit{scrollbar}) kako bi korisnici mogli imati pristup svim komandama. Uvijek je oznaèena samo jedna komanda a unosom odreðenog pojma prikazuje se lista komandi koja odgovara tom pojmu, kako je prikazano na slici.
 
 Paletom æe se moæi upravljati s tipkovnicom (koristeæi strelice za gore i dolje te \textit{Enter} za odabir komande) ili s mišem (korištenjem trake za pomicanje i klikanjem na željenu komandu).
 
 \begin{figure}[!htbp]
 	\begin{center}
-		\includegraphics[height=4.5cm,width=8.5cm,keepaspectratio=true]{snv_app_aware}
+		\includegraphics[scale=0.70]{snv_app_aware}
 		\caption{Univerzalna paleta komandi je svjesna aplikacije koju korisnik trenutno upotrebljava}
 		\label{fig:snv_app_aware}
 	\end{center}
@@ -100,7 +100,53 @@ Sve u svemu, JSON predstavlja prikladan format za zapis podataka ovakvog tipa, j
 
 \section{Prezentacija}
 
-Napisati prezentaciju.
+\begin{figure}[!htpb]
+	\begin{center}
+		\subfloat[Bez unosa]{\label{fig:aacp_before} \includegraphics[scale=0.75]{aacp_before}} \\
+		\subfloat[S unosom]{\label{fig:aacp_after} \includegraphics[scale=0.75]{aacp_after}}
+		\caption{Konaèni izgled univerzalne palete komandi}
+		\label{fig:aacp_look}
+	\end{center}
+\end{figure}
+
+Konaèni izgled univerzalne palete komandi možemo vidjeti na slikama \ref{fig:aacp_look}. Svaka komanda pored svog naziva ima i odgovarajuæi preèac, što je uvedeno u nadi da æe korisnik kroz rad upamtiti odgovarajuæe preèace te ih s vremenom poèeti i koristiti, kako bi u kraæem roku dolazio do funkcionalnosti koja mu treba.
+
+Glavni jezik programa je engleski, jer je pretpostavka da æe ispitanici (studenti raèunarstva i profesori Zavoda za raèunarstvo) biti bolje upoznati s radom na softveru koji je podešen za originalni, engleski jezik.
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=0.70]{aacp_test}
+		\caption{Test mod}
+		\label{fig:aacp_test}
+	\end{center}
+\end{figure}
+
+Dodatno, u svrhu provoðenja eksperimenta i ispitivanja upotrebljivosti univerzalne palete komandi uveden je i \textbf{test mod}, što se može vidjeti na slici \ref{fig:aacp_test}. Predviðena su dva modaliteta testiranja, gdje je u jednom modalitetu korištenje palete dano na raspolaganje a u drugom nije (ovdje se program pokreæe samo za svrhu mjerenja vremena obavljanja ispitnog zadatka).
+
+% Možda u Verbatim
+
+\begin{figure}[!htbp]
+	\begin{lstlisting}[language={}, label={code:2.2}, caption={Primjer stvorenog izvještaja eksperimenta (datoteka tmilanovic\_2\_report.txt)}]
+	Username: tmilanovic
+	Start Timestamp: 1358.316003
+	
+	Commands:
+	soffice.bin: Align Left - 1365.989010
+	soffice.bin: Apply Heading 2 Paragraph Style - 1367.789081
+	soffice.bin: Find and Replace - 1370.069251
+	
+	End Timestamp: 1373.265085
+	
+	Number of executed commands: 3
+	Measured time: 14.949082 s
+	\end{lstlisting}
+\end{figure}
+
+Nakon završetka testiranja (pritiskom na tipku \textit{Enter}) stvorit æe se tekstualna datoteka s imenom oblika \textit{korisnickoime\_modalitet\_report.txt}, èiji je primjer dan u isjeèku \ref{code:2.2}. Ovdje se nalazi popis svih komandi koje su bile upotrijebljene za vrijeme testiranja (ime Linux procesa za kojeg su bile iskorištenje, njihovo ime i vremenski trenutak u kojem su izvršene).
+
+Vremenske peèate (eng. \textit{timestamps}) ispisuje Python metoda \textit{time.monotonic()} \cite{5_2019}. Definirani su u sekundama i nemaju referentnu toèku veæ je potrebno gledati razliku izmeðu dva peèata za mjerenje vremena. Glavna karakteristika \textit{monotonic} satova je nemoguænost da idu nazad, odnosno na njih ne utjeèe promjena sistemskog sata.
+
+Izvještaj za prvi modalitet rada (bez palete) razlikuje se u izostanku popisa komandi.
 
 \section{Izazovi i moguæa poboljšanja}
 
