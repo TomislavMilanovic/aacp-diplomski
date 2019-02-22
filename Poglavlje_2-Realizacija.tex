@@ -24,6 +24,8 @@ Paletom æe se moæi upravljati s tipkovnicom (koristeæi strelice za gore i dolje 
 
 Glavna znaèajka univerzalne palete komandi je njena svjesnost aplikacije koju korisnik trenutno upotrebljava, što je vidljivo na slici \ref{fig:snv_app_aware} (prikazane komande su samo za demonstraciju koncepta). Ovisno o aplikaciji, izbor komandi se razlikuje.
 
+
+
 Dodatno, univerzalna paleta komandi æe pamtiti i frekvenciju korištenja svake komande, kako bi one koje se najèešæe koriste bile prikazane na vrhu liste. Nakon iznesenih zahtjeva, nameæu se sljedeæi izazovi:
 \begin{itemize}
 	\item Kako prepoznati aplikaciju koja se trenutno koristi?
@@ -112,6 +114,17 @@ Sve u svemu, JSON predstavlja prikladan format za zapis podataka ovakvog tipa, j
 Konaèni izgled univerzalne palete komandi možemo vidjeti na slikama \ref{fig:aacp_look}. Svaka komanda pored svog naziva ima i odgovarajuæi preèac, što je uvedeno u nadi da æe korisnik kroz rad upamtiti odgovarajuæe preèace te ih s vremenom poèeti i koristiti, kako bi u kraæem roku dolazio do funkcionalnosti koje mu trebaju.
 
 Glavni jezik programa je engleski, jer je pretpostavka da æe ispitanici (studenti raèunarstva i profesori Zavoda za raèunarstvo) biti bolje upoznati s radom na softveru koji je podešen za originalni, engleski jezik.
+
+\begin{figure}[!htpb]
+	\begin{center}
+		\subfloat[Google Chrome]{\label{fig:aacp_chrome} \includegraphics[scale=0.55]{aacp_chrome}} \\
+		\subfloat[LibreOffice Writer]{\label{fig:aacp_office} \includegraphics[scale=0.5]{aacp_office}}
+		\caption{Paleta komandi je svjesna aplikacije za koju se koristi}
+		\label{fig:aacp_app_aware}
+	\end{center}
+\end{figure}
+
+Slike \ref{fig:aacp_app_aware} prezentiraju stvarni primjer adaptabilnosti univerzalne palete komandi. Ovisno o aplikaciji kojoj pripada prozor koji je trenutno u fokusu, bit æe ponuðene razlièite komande, odnosno one koje odgovaraju toj aplikaciji. Univerzalna paleta komandi na taj naèin predstavlja uniformno suèelje koje se može koristiti u mnogo razlièitih konteksta.
 
 \begin{figure}[!htbp]
 	\begin{center}
