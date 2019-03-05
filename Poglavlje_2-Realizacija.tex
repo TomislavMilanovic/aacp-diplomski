@@ -161,6 +161,91 @@ Vremenske peèate (eng. \textit{timestamps}) ispisuje Python metoda \textit{time.
 
 Izvještaj za prvi modalitet rada (bez palete) razlikuje se u izostanku popisa komandi.
 
+\section{Implementacija Windows verzije}
+
+Buduæi da univerzalna paleta komandi ne stremi samo visokoj razini kompatibilnosti s razlièitim aplikacijama nego i razlièitim operacijskim sustavima koji se koriste na klasiènim, stolnim raèunalima, implementiran je i prototip Windows verzije.
+
+\begin{figure}[!htbp]
+	\begin{python}[label={code:2.3}, caption={Prepoznavanje procesa kojem pripada trenutno fokusirani prozor u Windows operacijskim sustavima}]
+import os
+import win32gui
+import win32process
+import psutil
+	
+def get_process_name_windows():
+ try:
+   w_gui = win32gui
+   w_process = win32process
+   foreground_window = w_gui.GetForegroundWindow()
+   pid = w_process.GetWindowThreadProcessId(foreground_window)
+   process_name = psutil.Process(pid[-1]).name()
+  except:
+   process_name = ''
+
+  process_name = os.path.splitext(process_name)[0]
+  return process_name
+	\end{python}
+\end{figure}
+
+Dodavanje podrške za Windows sustave iziskivalo je nadogradnju trenutnog programskog koda palete. Bilo je potrebno riješiti dva glavna problema. Prvi problem je èinjenica da se \textit{xdotool}, koji na Linux sustavima omoguæava detekciju procesa kojem pripada trenutno fokusirani prozor, ne može upotrebljavati na Windows operacijskim sustavima. Zbog toga se zajedno koriste \textit{Win32 API} za Python \cite{7_2019} i \textit{psutil} modul \cite{8_2019} kako bi se saznalo ime procesa (izvršne datoteke) na temelju èega se uèitava odgovarajuæa JSON datoteka, što je prikazano u isjeèku koda \ref{code:2.3}.
+
+Drugi glavni izazov je èinjenica da Windows ima stroge kriterije dopuštanja aplikaciji da sama programatski pokuša postati glavni, fokusirani prozor \cite{9_2019}. To je implementirano jer se korisniku ne želi nametati neki prozor dok ga klikom ne fokusira. Meðutim, buduæi da korisnik itekako samostalno izražava želju za pozivanjem univerzalne palete komandi, koja se cijelo vrijeme izvršava kao pozadinski proces te u skladu s time nije trenutno aktivni prozor, potrebno je osmisliti naèin kako da paleta može postaviti fokus na sebe, što konaèno omoguæuje korisniku izbor i unos komandi bez potrebe za klikom na sam prozor palete. Takoðer, nakon što se paleta zatvori zbog izvršavanja izabrane komande, fokus se ne vraæa automatski na prozor aplikacije za koju je korisnik pozvao paletu.
+
+\begin{figure}[!htbp]
+	\begin{python}[label={code:2.4}, caption={Postavljanje fokusa na prozor palete}]
+w = win32gui
+# Pamæenje prozora trenutno korištene aplikacije
+currentApp = w.GetForegroundWindow()
+
+...
+import ctypes
+set_to_foreground = ctypes.windll.user32.SetForegroundWindow
+keybd_event = ctypes.windll.user32.keybd_event
+
+alt_key = 0x12
+extended_key = 0x0001
+key_up = 0x0002
+
+def steal_focus():
+   	# Emulacija pritiska tipke 'alt', 
+   	# što omoguæava postavljanje fokusa na paletu
+    keybd_event(alt_key, 0, extended_key | 0, 0)
+    set_to_foreground(root.winfo_id())
+    keybd_event(alt_key, 0, extended_key | key_up, 0)
+    ...
+    entry.focus_force()
+
+def bind_focus_out():
+    mainframe.bind('<FocusOut>', gui_close)
+
+# Postavljanje fokusa 200 ms nakon pozivanja palete
+root.after(200, steal_focus)
+
+# Povezivanje metode za zatvaranje prozora nakon 500 ms
+# Ovo je uvedeno zato jer se prozor palete brzo ugasio 
+# nakon pozivanja
+root.after(500, bind_focus_out)
+
+...
+
+def gui_close(entry=""):
+   	...
+   	# Vraæanje fokusa na prijašnju aplikaciju
+    win32gui.SetForegroundWindow(currentApp)
+	\end{python}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+		\includegraphics[scale=1]{aacp_windows}
+		\caption{Windows verzija univerzalne palete komandi}
+		\label{fig:aacp_windows}
+	\end{center}
+\end{figure}
+
+Rješenje problema fokusa prikazano je u isjeèku koda \ref{code:2.4}. Rješenje je inspirirano s odgovorom na \cite{10_2019}. Konaèno, izgled same palete, u kontekstu programa \textit{Google Chrome}, može se vidjeti na slici \ref{fig:aacp_windows}.
+
+
 \section{Izazovi i moguæa poboljšanja}
 
 \subsection{Izazovi podrške funkcionalnostima}
