@@ -1,0 +1,25 @@
+\chapter{Buduæi rad na univerzalnoj paleti komandi}
+
+Mnogi ispitanici su izrazili želju za korištenjem univerzalne palete komandi u svom svakodnevnom radu. Prototip koji je korišten u ispitivanju ne sadržava mnoge funkcionalnosti koje su nužne kako bi se paleta mogla široko distribuirati kao aplikacija oko koje bi se stvorila zajednica korisnika. Neke od ideja za buduænost ovog softvera su:
+
+\begin{itemize}
+\item Uporaba razvojnog okvira za \textit{desktop} aplikacije koji ima veæu zajednicu i podršku (primjerice, \textbf{Qt} \cite{17_2019} ili \textbf{Electron} \cite{18_2019}) te moguænost razvoja za više \textit{desktop} platformi (Windows, MacOS, Linux).
+\item Razvoj ureðivaèa JSON datoteka koje definiraju komande za svaki program.
+\item Razvoj centralnog \textit{web} repozitorija za JSON datoteke komandi.
+\item Rješavanje izazova i uvoðenje poboljšanja navedenih u poglavlju \ref{sec:challenges}:
+	\begin{itemize}
+	\item Podrška funkcionalnostima koje nisu pokrivene standardnim tipkovnièkim preèacima
+	\item Ispravna detekcija bilo kojeg programa
+	\end{itemize}
+\item Podrška za automatsko pokretanje na poèetku rada sustava.
+\item Podrška za sakrivanje aplikacije unutar \textit{system tray} dijela radne površine na Windows operacijskim sustavima te na ekvivalentima u Linux i MacOS sustavima.
+\item Podrška za nadogradnjom aplikacije.
+\item Implementacija raznih postavki poput:
+	\begin{itemize}
+	\item Podrške za razlièite jezike
+	\item Velièine i vrste fonta u aplikaciji
+	\item Maksimalnog broja komandi vidljivih u bilo kojem trenutku
+	\item Preèaca za poziv palete komandi
+	\end{itemize}
+\item Promidžba aplikacije na Internetu i stvaranje zajednice koja bi pružila pomoæ pri izradi JSON datoteka komandi i razvoju same aplikacije. U tom sluèaju, univerzalna paleta komandi bi mogla biti aplikacija otvorenog koda.
+\end{itemize}
