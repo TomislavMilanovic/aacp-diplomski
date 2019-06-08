@@ -1,8 +1,8 @@
 \chapter{Uvod}
 
-Interakcija èovjeka i raèunala (eng. \textit{\gls{hci}}) istražuje dizajn i korištenje raèunalne tehnologije, odnosno suèelja izmeðu ljudi (korisnika) i raèunala. Uspješno suèelje za interakciju s raèunalom ima za cilj postiæi dobru upotrebljivost (eng. \textit{usability}), koja ukljuèuje olakšan i ubrzan rad te jednostavno savladavanje uporabe samog korisnièkog suèelja. Intuitivnost se postiže korištenjem koncepata i mehanizama koji su potencijalnim korisnicima veæ otprije poznati kroz iskustvo rada s ostalim korisnièkim suèeljima.
+Interakcija èovjeka i raèunala (eng. \textit{\gls{hci}}) istražuje dizajn i korištenje raèunalne tehnologije, odnosno suèelja izmeðu ljudi (korisnika) i raèunala. Uspješno suèelje za interakciju s raèunalom ima za cilj postiæi dobru upotrebljivost (eng. \textit{usability}), koja podrazumijeva olakšan i ubrzan rad te jednostavno savladavanje uporabe samog korisnièkog suèelja. Intuitivnost se postiže uporabom koncepata i mehanizama koji su potencijalnim korisnicima veæ otprije poznati kroz iskustvo rada s ostalim suèeljima.
 
-U ovom radu, fokus je usmjeren na izradi i evaluaciji raèunalnog programa (\textbf{univerzalna paleta komandi}) koji nastoji omoguæiti korisniku jednostavan pristup funkcionalnostima \textbf{bilo kojeg} drugog programa uz pomoæ pretrage po kljuènim rijeèima, umjesto traženja po hijerarhiji izbornika ili ostalim dijelovima suèelja tog programa. Poseban je naglasak stavljen na brzi dohvat rjeðe korištenih funkcionalnosti, za koje korisnik možda ne zna napamet gdje se nalaze.
+U ovom radu, fokus je usmjeren na izradi i evaluaciji raèunalnog programa (\textbf{univerzalna paleta komandi}) koji nastoji omoguæiti korisniku jednostavan pristup funkcionalnostima \textbf{bilo kojeg} drugog programa uz pomoæ pretrage po kljuènim rijeèima, umjesto traženja po hijerarhiji izbornika ili ostalim dijelovima suèelja tog programa. Poseban je naglasak stavljen na brzi dohvat rjeðe korištenih funkcionalnosti, za koje korisnik vrlo vjerojatno ne zna napamet gdje se nalaze. Važno je napomenuti kako je u sklopu ovog rada implementiran prototip s funkcionalnostima koje su dovoljne za provedbu eksperimenta ali ne i široku upotrebu.
 
 \section{Paleta komandi}
 
@@ -14,9 +14,9 @@ U ovom radu, fokus je usmjeren na izradi i evaluaciji raèunalnog programa (\text
 	\end{center}
 \end{figure}
 
-Paleta komandi (eng. \textit{command palette}) predstavlja listu dostupnih komandi koje se mogu izvršiti unutar programa i polje za unos kljuènih rijeèi za pronalazak željene komande. Na slici \ref{fig:atom_command_palette} \cite{1_2019} prikazan je moguæi izgled palete u programu \textit{Atom} (ureðivaè teksta i programskog koda) kada se unese "com". Korisnik može odabrati i izvršiti jednu od ponuðenih komandi. Paleta se poziva korištenjem tipkovnièkog preèaca \textit{Cmd+Shift+P} na macOS, odnosno \textit{Ctrl+Shift+P} na Linux i Windows operacijskim sustavima.
+Paleta komandi (eng. \textit{command palette}) predstavlja listu dostupnih komandi koje se mogu izvršiti unutar nekog programa i polje za unos kljuènih rijeèi kako bi se brzo pronašla željena komande. Na slici \ref{fig:atom_command_palette} \cite{1_2019} prikazan je moguæi izgled palete u programu \textit{Atom} (ureðivaè teksta i programskog koda) kada se unese "com". Korisnik može odabrati i izvršiti jednu od ponuðenih komandi. Paleta se poziva korištenjem tipkovnièkog preèaca \textit{Cmd+Shift+P} na MacOS, odnosno \textit{Ctrl+Shift+P} na Linux i Windows operacijskim sustavima.
 
-Dodatna prednost palete komandi je smanjivanje potrebe za prebacivanjem izmeðu tipkovnice i miša (eng. \textit{homing} - prebacivanje s jednog na drugi ureðaj za upravljanje raèunalom). U ovom radu implementirana je univerzalna paleta komandi, koja se može koristiti u bilo kojem programu jer je svjesna aplikacije za koju se pokreæe.
+Dodatna prednost palete komandi je smanjivanje potrebe za prebacivanjem izmeðu tipkovnice i miša (eng. \textit{homing} - prebacivanje s jednog na drugi ureðaj za upravljanje raèunalom). U ovom radu implementirana je univerzalna paleta komandi, koja se može koristiti u bilo kojem programu jer može prepoznati aplikaciju koja se trenutno upotrebljava.
 
 \section{Evaluacija univerzalne palete komandi}
 
@@ -28,4 +28,4 @@ Upotrebljivost univerzalne palete komandi ispituje se na temelju unaprijed defin
 	\item \textbf{GIMP} - ureðivaè slika
 \end{itemize}
 
-Zadaci su osmišljeni tako da predstave uobièajeni, svakodnevni rad na raèunalu. Sastoje se od kombinacije èešæe i rjeðe korištenih funkcionalnosti navedenih programa. Usporeðuje se vrijeme potrebno za obavljanje svih zadataka sa i bez univerzalne palete komandi. Takoðer, preko predispitnih i postispitnih anketa želi se dobiti uvid u kojoj mjeri ispitanici koriste tipkovnièke preèace i palete komandi iz programa koji ih podržavaju te na kraju njihovo zadovoljstvo s univerzalnom paletom komandi.
+Zadaci su osmišljeni tako da predstavljaju uobièajeni, svakodnevni rad na raèunalu. Sastoje se od kombinacije èešæe i rjeðe korištenih funkcionalnosti navedenih programa. Usporeðuje se vrijeme potrebno za obavljanje svih zadataka sa i bez univerzalne palete komandi na raspolaganju. Takoðer, preko predispitnih i postispitnih anketa želi se dobiti uvid u kojoj mjeri ispitanici koriste tipkovnièke preèace i palete komandi iz programa koji ih podržavaju te na kraju njihovo zadovoljstvo s univerzalnom paletom komandi.
