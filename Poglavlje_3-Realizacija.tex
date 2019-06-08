@@ -32,9 +32,9 @@ Dodatno, univerzalna paleta komandi æe pamtiti i frekvenciju korištenja svake ko
 	\item Koji je univerzalan naèin na koji neki program može izvršiti bilo koju radnju u nekom drugom programu?
 \end{itemize}
 
-Prvi problem je riješen tako da se koristi alat za prepoznavanje procesa kojem trenutno fokusirani prozor pripada te se u skladu s time uèitava odgovarajuæa lista komandi. Kod drugog izazova, izvršavanje komandi se postiže emulacijom tipkovnièkih preèaca. Primjerice, kod izvršavanja komande \textit{Otvori datoteku}, univerzalna paleta æe emulirati tipkovnièki preèac \textit{Ctrl + O}.
+Prvi problem je riješen tako da se koristi alat za prepoznavanje procesa kojem trenutno fokusirani prozor pripada te se u skladu s time uèitava odgovarajuæa lista komandi. Kod drugog izazova, izvršavanje komandi se postiže emulacijom tipkovnièkih preèaca. Primjerice, kod izvršavanja komande "\textit{Otvori datoteku"}, univerzalna paleta æe emulirati tipkovnièki preèac "\textit{Ctrl + O}".
 
-Tipkovnièki preèaci su koncept koji je široko rasprostranjen u softveru na klasiènim, \textit{desktop} raèunalima, gdje se koriste miš i tipkovnica. Gotovo da nema aplikacije koja ih ne koristi kako bi svojim korisnicima omoguæila ubrzani rad s aplikacijom. Zbog toga, emuliranje preèaca donosi \textbf{univerzalnost} ovom programu.
+Tipkovnièki preèaci su koncept koji je široko rasprostranjen u softveru na klasiènim, \textit{desktop} raèunalima, gdje se koriste miš i tipkovnica. Zahtjevno je pronaæi aplikaciju koja ih ne koristi kako bi svojim korisnicima omoguæila ubrzani rad s aplikacijom. Zbog toga, emuliranje preèaca donosi \textbf{univerzalnost} ovom programu.
 
 \section{Dijagram toka}
 
@@ -46,23 +46,23 @@ Tipkovnièki preèaci su koncept koji je široko rasprostranjen u softveru na klasi
 	\end{center}
 \end{figure}
 
-Cjelokupni naèin rada univerzalne palete komandi prikazan je na slici \ref{fig:snv_flow_diagram}. Veæinu vremena, ovaj program æe provesti kao pozadinski proces (eng. \textit{daemon}) te æe osluškivati korisnikove unose na tipkovnici. U trenutku kada korisnik upotrijebi \textit{meta-preèac}, koji je u ovom radu podešen na \textit{Ctrl + Win}, program æe provjeriti prvo je li aplikacija koji se trenutno koristi podržana. Ako nije, neæe se ništa dogoditi, a u suprotnom sluèaju, uèitat æe se lista komandi i paleta æe se prikazati na ekranu.
+Cjelokupni naèin rada univerzalne palete komandi prikazan je na slici \ref{fig:snv_flow_diagram}. Veæinu vremena, ovaj program æe provesti kao pozadinski proces (eng. \textit{daemon}) te æe osluškivati korisnikove unose na tipkovnici. U trenutku kada korisnik upotrijebi \textit{meta-preèac}, koji je u ovom radu podešen na \textit{Ctrl + Win}, program æe provjeriti prvo je li aplikacija koja se trenutno koristi podržana. Ako nije, neæe se ništa dogoditi, a u suprotnom sluèaju, uèitat æe se lista komandi i paleta æe se prikazati na ekranu.
 
-Korisnik može pretražiti i izvršiti željenu komandu ili može zatvoriti paletu korištenjem tipke \textit{Esc} ili gubitkom fokusa na paletu (klikom izvan njenog prozora).
+Korisnik može pretražiti i izvršiti željenu komandu ili može zatvoriti paletu pritiskom na tipku \textit{Esc} ili gubitkom fokusa na paletu (klikom izvan njenog prozora).
 
 \section{Implementacija}
 
-Univerzalna paleta komandi implementirana je za sustave bazirane na Linuxu. Konkretno, koristila se Antergos distribucija s \textbf{KDE} okolišem. Temelji se na programskom jeziku Python 3.7.2 i sljedeæim modulima:
+Prototip univerzalne palete komandi u poèetku izrade ovog rada implementiran je za sustave bazirane na Linuxu. Konkretno, koristila se Antergos distribucija s \textbf{KDE} okolišem. Prototip se temelji na programskom jeziku Python 3.7.2 i sljedeæim modulima:
 
 \begin{itemize}
-	\item \textit{Tkinter} - \textit{de-facto} standardni paket za razvoj GUI aplikacija, temeljen na \textbf{Tcl/Tk} alatima \cite{2_2019}. Služi za implementaciju korisnièkog suèelja univerzalne palete komandi.
-	\item \textit{PyAutoGUI} - modul za programatsko izvršavanje (emulaciju) uporabe miša i tipkovnice. Koristi se za emulaciju tipkovnièkih preèaca, èime univerzalna paleta komandi može izvršiti neku radnju u bilo kojoj drugoj aplikaciji.
-	\item \textit{pynput} - knjižnica funkcija za osluškivanje korisnikovog unosa na tipkovnici. Omoguæava uporabu meta-preèaca za pozivanje univerzalne palete komandi.
+	\item \textit{Tkinter} je \textit{de-facto} standardni paket za razvoj GUI aplikacija, temeljen na \textbf{Tcl/Tk} alatima \cite{2_2019}. Služi za implementaciju korisnièkog suèelja univerzalne palete komandi.
+	\item \textit{PyAutoGUI} je modul za programatsko izvršavanje (emulaciju) uporabe miša i tipkovnice. Koristi se za emulaciju tipkovnièkih preèaca, èime univerzalna paleta komandi može izvršiti neku radnju u bilo kojoj drugoj aplikaciji.
+	\item \textit{Pynput} je knjižnica funkcija za osluškivanje korisnikovog unosa na tipkovnici. Omoguæava uporabu meta-preèaca za pozivanje univerzalne palete komandi.
 \end{itemize}
 
-Za prepoznavanje aplikacije koju korisnik trenutno upotrebljava koristi se Linux alat \textit{xdotool} \cite{3_2019}, uz èiju se pomoæ može saznati PID (eng. \textit{Process ID}) trenutno korištene aplikacije. S tom informacijom, od poznate \textit{shell} naredbe \textit{ps} doznajemo ime procesa s tim PID-om.
+Za prepoznavanje aplikacije koju korisnik trenutno upotrebljava koristi se Linux alat \textit{xdotool} \cite{3_2019}, uz èiju se pomoæ može saznati PID (eng. \textit{Process ID}) trenutno korištene aplikacije. S tom informacijom, od poznate \textit{shell} naredbe \textit{ps} moguæe je saznati ime procesa s tim PID-om.
 
-Komande se spremaju kao JSON datoteke za svaku aplikaciju zasebno. Nazivi tih datoteka odgovaraju imenima procesa tih aplikacija u Linux sustavima.
+Komande se spremaju kao JSON datoteke zasebno za svaku aplikaciju. Nazivi tih datoteka odgovaraju imenima procesa tih aplikacija u Linux sustavima.
 
 \begin{figure}[!htbp]
 	\begin{lstlisting}[language=json, label={code:2.1}, caption={Pokazni primjer moguæe JSON datoteke za konfiguraciju komandi u programu Google Chrome}]
@@ -92,13 +92,13 @@ Komande se spremaju kao JSON datoteke za svaku aplikaciju zasebno. Nazivi tih da
 	\end{lstlisting}
 \end{figure}
 
-U isjeèku koda \ref{code:2.1} možemo vidjeti kako bi izgledao JSON zapis komandi za program Google Chrome kada bismo imali samo dvije stavke. Pri tome, važno je napomenuti kako oznake za tipke koje èine odreðeni tipkovnièki preèac (\textit{ctrl}, \textit{shift}, \textit{del} i slièni) moraju odgovarati oznakama koje se pojavljuju u dokumentaciji za modul \textit{PyAutoGUI} \cite{4_2019}.
+U isjeèku koda \ref{code:2.1} možemo vidjeti kako bi izgledao JSON zapis komandi za program Google Chrome kada bismo imali samo dvije stavke. Pri tome, važno je napomenuti da oznake za tipke koje èine odreðeni tipkovnièki preèac (\textit{ctrl}, \textit{shift}, \textit{del} i slièni) moraju odgovarati oznakama koje se pojavljuju u dokumentaciji za modul \textit{PyAutoGUI} \cite{4_2019}.
 
 Prvo polje (u ovom primjeru \textit{Bookmark} i \textit{Clear Browsing Data}) predstavlja ime komande, odnosno ono što æe se korisniku univerzalne palete komandi prikazati na ekranu.
 
 Polje \textit{frequency} oznaèava koliko je puta komanda bila korištena otkad je korisnik poèeo upotrebljavati univerzalnu paletu komandi. Može se zakljuèiti kako je jednostavno podešavati tu vrijednost, ukoliko postoji potreba za time.
 
-Sve u svemu, JSON predstavlja prikladan format za zapis podataka ovakvog tipa, jer je jednostavan za uporabu i jasno èitljiv ljudima.
+JSON predstavlja prikladan format za zapis podataka ovakvog oblika jer je jednostavan za uporabu i èitljiv ljudima (eng. \textit{human-readable}).
 
 \section{Prezentacija}
 
@@ -111,7 +111,7 @@ Sve u svemu, JSON predstavlja prikladan format za zapis podataka ovakvog tipa, j
 	\end{center}
 \end{figure}
 
-Konaèni izgled univerzalne palete komandi možemo vidjeti na slikama \ref{fig:aacp_look}. Svaka komanda pored svog naziva ima i odgovarajuæi preèac, što je uvedeno u nadi da æe korisnik kroz rad upamtiti odgovarajuæe preèace te ih s vremenom poèeti i koristiti, kako bi u kraæem roku dolazio do funkcionalnosti koje mu trebaju.
+Konaèni izgled prototipa univerzalne palete komandi možemo vidjeti na slikama \ref{fig:aacp_look}. Svaka komanda pored svog naziva ima i odgovarajuæi preèac, što korisniku može pomoæi da kroz rad upamti nove preèace te ih s vremenom poène i koristiti, kako bi u kraæem roku dolazio do funkcionalnosti koje mu trebaju.
 
 Glavni jezik programa je engleski, jer je pretpostavka da æe ispitanici (studenti raèunarstva i profesori Zavoda za raèunarstvo) biti bolje upoznati s radom na softveru koji je podešen za originalni, engleski jezik.
 
@@ -124,7 +124,7 @@ Glavni jezik programa je engleski, jer je pretpostavka da æe ispitanici (student
 	\end{center}
 \end{figure}
 
-Slike \ref{fig:aacp_app_aware} prezentiraju stvarni primjer adaptabilnosti univerzalne palete komandi. Ovisno o aplikaciji kojoj pripada prozor koji je trenutno u fokusu, bit æe ponuðene razlièite komande, odnosno one koje odgovaraju toj aplikaciji. Univerzalna paleta komandi na taj naèin predstavlja uniformno suèelje koje se može koristiti u mnogo razlièitih konteksta.
+Slike \ref{fig:aacp_app_aware} predstavljaju stvarni primjer prilagodljivosti univerzalne palete komandi. Ovisno o aplikaciji kojoj pripada prozor koji je trenutno u fokusu, bit æe ponuðene razlièite komande, odnosno one koje odgovaraju toj aplikaciji. Paleta na taj naèin predstavlja jedinstveno suèelje koje se može koristiti u mnogo razlièitih konteksta.
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -157,13 +157,13 @@ Dodatno, u svrhu provoðenja eksperimenta i ispitivanja upotrebljivosti univerzal
 
 Nakon završetka testiranja (pritiskom na tipku \textit{Enter}) stvorit æe se tekstualna datoteka s imenom oblika \textit{korisnickoime\_modalitet\_report.txt}, èiji je primjer dan u isjeèku \ref{code:2.2}. Ovdje se nalazi popis svih komandi koje su bile upotrijebljene za vrijeme testiranja (ime Linux procesa za kojeg su bile iskorištene, njihovo ime i vremenski trenutak u kojem su izvršene).
 
-Vremenske peèate (eng. \textit{timestamps}) ispisuje Python metoda \textit{time.monotonic()} \cite{5_2019}. Definirani su u sekundama i nemaju referentnu toèku veæ je potrebno gledati razliku izmeðu dva peèata za mjerenje vremena. Glavna karakteristika \textit{monotonic} satova je nemoguænost da idu nazad, odnosno na njih ne utjeèe promjena sistemskog sata.
+Vremenske peèate (eng. \textit{timestamps}) ispisuje Python metoda \textit{time.monotonic()} \cite{5_2019}. Definirani su u sekundama i nemaju referentnu toèku veæ je potrebno promatrati razliku izmeðu dva peèata za mjerenje vremena. Glavna karakteristika \textit{monotonic} satova je nemoguænost da idu nazad, odnosno na njih ne utjeèe promjena sistemskog sata.
 
 Izvještaj za prvi modalitet rada (bez palete) razlikuje se u izostanku popisa komandi.
 
 \section{Implementacija Windows verzije}
 
-Buduæi da univerzalna paleta komandi ne stremi samo visokoj razini kompatibilnosti s razlièitim aplikacijama nego i razlièitim operacijskim sustavima koji se koriste na klasiènim, stolnim raèunalima, implementiran je i prototip Windows verzije.
+Buduæi da univerzalna paleta komandi nastoji postiæi visoku razinu kompatibilnosti i s razlièitim operacijskim sustavima koji se koriste na klasiènim, stolnim raèunalima, implementiran je i prototip Windows verzije.
 
 \begin{figure}[!htbp]
 	\begin{python}[label={code:2.3}, caption={Prepoznavanje procesa kojem pripada trenutno fokusirani prozor u Windows operacijskim sustavima}]
@@ -187,9 +187,9 @@ def get_process_name_windows():
 	\end{python}
 \end{figure}
 
-Dodavanje podrške za Windows sustave iziskivalo je nadogradnju trenutnog programskog koda palete. Bilo je potrebno riješiti dva glavna problema. Prvi problem je èinjenica da se \textit{xdotool}, koji na Linux sustavima omoguæava detekciju procesa kojem pripada trenutno fokusirani prozor, ne može upotrebljavati na Windows operacijskim sustavima. Zbog toga se zajedno koriste \textit{Win32 API} za Python \cite{7_2019} i \textit{psutil} modul \cite{8_2019} kako bi se saznalo ime procesa (izvršne datoteke) na temelju èega se uèitava odgovarajuæa JSON datoteka, što je prikazano u isjeèku koda \ref{code:2.3}.
+Implementiranje podrške za Windows sustave iziskivalo je nadogradnju trenutnog programskog koda palete. Bilo je potrebno riješiti dva osnovna problema. Prvi problem je èinjenica da se \textit{xdotool}, koji na Linux sustavima omoguæava detekciju procesa kojem pripada trenutno fokusirani prozor, ne može upotrebljavati na Windows operacijskim sustavima. Zbog toga se zajedno koriste \textit{Win32 API} za Python \cite{7_2019} i \textit{psutil} modul \cite{8_2019} kako bi se doznalo ime procesa (izvršne datoteke) na temelju èega se uèitava odgovarajuæa JSON datoteka, što je prikazano u isjeèku koda \ref{code:2.3}.
 
-Drugi glavni izazov je èinjenica da Windows ima stroge kriterije dopuštanja aplikaciji da sama programatski pokuša postati glavni, fokusirani prozor \cite{9_2019}. To je implementirano jer se korisniku ne želi nametati neki prozor dok ga klikom ne fokusira. Meðutim, buduæi da korisnik itekako samostalno izražava želju za pozivanjem univerzalne palete komandi, koja se cijelo vrijeme izvršava kao pozadinski proces te u skladu s time nije trenutno aktivni prozor, potrebno je osmisliti naèin kako da paleta može postaviti fokus na sebe, što konaèno omoguæuje korisniku izbor i unos komandi bez potrebe za klikom na sam prozor palete. Takoðer, nakon što se paleta zatvori zbog izvršavanja izabrane komande, fokus se ne vraæa automatski na prozor aplikacije za koju je korisnik pozvao paletu.
+Drugi glavni izazov je èinjenica da Windows ima stroge kriterije dozvoljavanja aplikaciji da sama programatski pokuša postati glavni, fokusirani prozor \cite{9_2019}. Razlog tome je želja da se korisniku ne nameæe neki prozor dok ga on sam klikom ne fokusira. Meðutim, buduæi da korisnik itekako samostalno izražava želju za pozivanjem univerzalne palete komandi, koja se cijelo vrijeme izvršava kao pozadinski proces te u skladu s time nije trenutno aktivni prozor, potrebno je osmisliti naèin kako da paleta može postaviti fokus na sebe, što konaèno omoguæuje korisniku izbor i unos komandi bez potrebe za klikom na sam prozor palete kad se ona pozove. Takoðer, nakon što se paleta zatvori zbog izvršavanja izabrane komande, fokus se ne vraæa automatski na prozor aplikacije za koju je korisnik pozvao paletu.
 
 \begin{figure}[!htbp]
 	\begin{python}[label={code:2.4}, caption={Postavljanje fokusa na prozor palete}]
@@ -222,7 +222,7 @@ def bind_focus_out():
 root.after(200, steal_focus)
 
 # Povezivanje metode za zatvaranje prozora nakon 500 ms
-# Ovo je uvedeno zato jer se prozor palete brzo ugasio 
+# Ovo je uvedeno zato jer se prozor palete brzo zatvara 
 # nakon pozivanja
 root.after(500, bind_focus_out)
 
@@ -238,13 +238,12 @@ def gui_close(entry=""):
 \begin{figure}[!htbp]
 	\begin{center}
 		\includegraphics[scale=1]{aacp_windows}
-		\caption{Windows verzija univerzalne palete komandi}
+		\caption{Windows inaèica prototipa univerzalne palete komandi}
 		\label{fig:aacp_windows}
 	\end{center}
 \end{figure}
 
-Rješenje problema fokusa prikazano je u isjeèku koda \ref{code:2.4}. Rješenje je inspirirano s odgovorom na \cite{10_2019}. Konaèno, izgled same palete, u kontekstu programa \textit{Google Chrome}, može se vidjeti na slici \ref{fig:aacp_windows}.
-
+Rješenje problema fokusa prikazano je u isjeèku koda \ref{code:2.4}. Rješenje se temelji na odgovoru \cite{10_2019}. Konaèno, izgled same palete, u kontekstu programa \textit{Google Chrome}, može se vidjeti na slici \ref{fig:aacp_windows}.
 
 \section{Izazovi i moguæa poboljšanja} \label{sec:challenges}
 
@@ -252,14 +251,14 @@ Rješenje problema fokusa prikazano je u isjeèku koda \ref{code:2.4}. Rješenje je
 
 Nisu sve funkcionalnosti koje se mogu koristiti u nekoj aplikaciji pokrivene odgovarajuæim tipkovnièkim preèacem. Meðutim, programi u svojim postavkama èesto imaju moguænost podešavanja tipkovnièkih preèaca za one funkcionalnosti koje ga inaèe nemaju. Na taj naèin može se ostvariti proširenje opsega funkcionalnosti koje se mogu izvršiti uz pomoæ univerzalne palete komandi. Dodatna prednost kod takvih programa bila bi moguænost spremanja postavki tipkovnièkih preèaca u datoteke koje se zatim mogu dijeliti sa zajednicom korisnika tog programa.
 
-Programi èesto sadržavaju mnogobrojne funkcionalnosti i moguænosti, što znaèi da izrada JSON datoteke za univerzalnu paletu komandi može iziskivati odreðeno vrijeme i trud. Sreæom, tu je datoteku dovoljno napisati samo jednom, a zatim se ona može dijeliti unutar potencijalne zajednice korisnika univerzalne palete komandi. Kako bi proces pisanja JSON datoteke bio pristupaèan korisnicima (eng. \textit{user friendly}), postoji opcija izrade aplikacije koja bi služila ureðivanju takvih datoteka, bez potrebe da se direktno ureðuje JSON zapis za njih.
+Programi èesto sadržavaju mnogobrojne funkcionalnosti i moguænosti, što znaèi da izrada JSON datoteke za univerzalnu paletu komandi može iziskivati odreðeno vrijeme i trud. Sreæom, tu je datoteku dovoljno napisati samo jednom, a zatim se ona može dijeliti unutar potencijalne zajednice korisnika univerzalne palete komandi. Kako bi proces pisanja JSON datoteke bio pristupaèan korisnicima (eng. \textit{user friendly}), postoji opcija izrade aplikacije koja bi služila ureðivanju takvih datoteka, bez potrebe da se direktno ureðuje JSON zapis za njih u jednom od ureðivaèa teksta.
 
 \subsection{Izazovi ispravne detekcije programa}
 
-Prema iznesenom dizajnu univerzalne palete komandi, detekcija aplikacije koju korisnik trenutno upotrebljava vrši se uz pomoæ imena procesa u Linux sustavu. Tijekom implementacije podrške za program \textit{LibreOffice Writer} uoèeno je da svi programi u \textit{LibreOffice} softverskom paketu imaju identièno ime procesa: \textit{soffice.bin}. To predstavlja problem prilikom uèitavanja odgovarajuæe JSON datoteke ako se želi ostvariti podrška za sve programe koji èine taj paket.
+Prema iznesenom dizajnu univerzalne palete komandi, detekcija aplikacije koju korisnik trenutno upotrebljava vrši se uz pomoæ imena procesa u Linux sustavu ili imena izvršne datoteke u Windows sustavima. Tijekom implementacije podrške za \textit{LibreOffice Writer} uoèeno je da svi programi u \textit{LibreOffice} softverskom paketu imaju identièno ime procesa: \textit{soffice.bin}. To predstavlja problem prilikom uèitavanja odgovarajuæe JSON datoteke ako se želi ostvariti podrška za sve programe koji èine taj paket.
 
-Ovaj problem se može riješiti tako da se u razmatranje prilikom detekcije programa uzme i naslov prozora. Oni se prilièno razlikuju, najèešæe sadržavaju ime otvorene datoteke ili u sluèaju preglednika interneta i ime stranice koju korisnik trenutno pretražuje. Važno je u tom sluèaju programski obraditi taj naslov tako da se iz njega išèita ime aplikacije, koje se najèešæe nalazi na kraju naslova prozora, odvojeno sa crticom (znak "-" ili "–", kratka i duga crtica).
+Ovaj problem se može riješiti tako da se u razmatranje prilikom detekcije programa uzme i naslov prozora. Oni se prilièno razlikuju, najèešæe sadržavaju ime otvorene datoteke ili u sluèaju preglednika interneta i ime stranice koju korisnik trenutno pregledava. Važno je u tom sluèaju programski obraditi taj naslov tako da se iz njega išèita ime aplikacije, koje se najèešæe nalazi na kraju naslova prozora, odvojeno sa crticom (znak "-" ili "–", odnosno kratka i duga crtica).
 
-Na kraju, treba uzeti u obzir i èinjenicu kako se s vremenom pojavljuju nove verzije aplikacija, koje mogu imati nove funkcionalnosti i samim time potencijalne nove komande za paletu. U Linux sustavima se verzija èesto može dobiti pokretanjem komande koja odgovara programu u konzoli s argumentom "-v" ili "--version". U Windows sustavima se ta informacija može dobiti iz izvršnih datoteka programa.
+Na kraju, treba uzeti u obzir i èinjenicu kako se s vremenom pojavljuju nove verzije aplikacija, koje mogu imati nove funkcionalnosti i samim time potencijalne nove komande za paletu. U Linux sustavima se verzija èesto može dobiti pokretanjem komande koja odgovara programu u konzoli s argumentom "-v" ili "-{}-version". U Windows sustavima se ta informacija može dobiti iz izvršnih datoteka programa.
 
-Ako se do te informacije ne može doæi programatski, preostaje ponuditi korisniku izbor odgovarajuæe verzije preko postavki univerzalne palete komandi.
+Ako se do te informacije ne može doæi programatski, preostaje ponuditi korisniku izbor odgovarajuæe verzije preko postavki univerzalne palete.
