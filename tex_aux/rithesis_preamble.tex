@@ -128,8 +128,8 @@ urlcolor=black
 }
 
 % Default fixed font does not support bold face
-\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
-\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
 
 % Custom colors
 \definecolor{deepblue}{rgb}{0,0,0.5}
@@ -140,6 +140,9 @@ urlcolor=black
 \newcommand\pythonstyle{\lstset{
 	language=Python,
 	basicstyle=\ttm,
+	numbers=left,
+	numbersep=7pt,
+	breaklines=true,
 	otherkeywords={self},             % Add keywords here
 	keywordstyle=\ttb\color{deepblue},
 	emph={get_process_name_windows},          % Custom highlighting
@@ -163,7 +166,7 @@ urlcolor=black
 \colorlet{numb}{magenta!60!black}
 
 \lstdefinelanguage{json}{
-	basicstyle=\normalfont\ttfamily,
+	basicstyle=\fontsize{9}{11}\normalfont\ttfamily,
 	numbers=left,
 	numberstyle=\scriptsize,
 	stepnumber=1,
