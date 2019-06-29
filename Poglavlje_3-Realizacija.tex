@@ -203,7 +203,7 @@ extended_key = 0x0001
 key_up = 0x0002
 
 def steal_focus():
-   	# Emulacija pritiska tipke 'alt', što omoguæava postavljanje fokusa na paletu
+    # Emulacija pritiska tipke 'alt', što omoguæava postavljanje fokusa na paletu
     keybd_event(alt_key, 0, extended_key | 0, 0)
     set_to_foreground(root.winfo_id())
     keybd_event(alt_key, 0, extended_key | key_up, 0)
@@ -221,7 +221,7 @@ root.after(500, bind_focus_out)
 ...
 def gui_close(entry=""):
    	...
-   	# Vraæanje fokusa na prijašnju aplikaciju
+    # Vraæanje fokusa na prijašnju aplikaciju
     win32gui.SetForegroundWindow(currentApp)
 	\end{python}
 \end{figure}
